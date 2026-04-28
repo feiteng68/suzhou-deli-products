@@ -1,0 +1,87 @@
+<view class="container">
+  <!-- 顶部 Banner -->
+  <view class="header">
+    <view class="header-logo">
+      <text class="logo-gold">苏州</text>德力
+    </view>
+    <view class="header-sub">SUZHOU DELI · PRODUCT GALLERY</view>
+    <view class="header-divider"></view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-entries">
+    <view class="entry-item" bindtap="goProducts">
+      <view class="entry-icon">🖼</view>
+      <view class="entry-text">全部产品</view>
+      <view class="entry-count">{{productCount}}款</view>
+    </view>
+    <view class="entry-item" bindtap="goInquiry">
+      <view class="entry-icon">💬</view>
+      <view class="entry-text">在线询价</view>
+      <view class="entry-count">即时回复</view>
+    </view>
+    <view class="entry-item" bindtap="copyWeChat">
+      <view class="entry-icon">📱</view>
+      <view class="entry-text">联系客服</view>
+      <view class="entry-count">微信咨询</view>
+    </view>
+  </view>
+
+  <!-- 热门推荐 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">热门推荐</view>
+      <view class="section-more" bindtap="goProducts">查看全部 →</view>
+    </view>
+    <scroll-view class="hot-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="hot-list">
+        <view class="hot-card" wx:for="{{hotProducts}}" wx:key="name" bindtap="goDetail" data-name="{{item.name}}">
+          <image class="hot-img" src="{{item.imgUrl}}" mode="aspectFill" lazy-load />
+          <view class="hot-name">{{item.name}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 品牌介绍 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">关于苏州德力</view>
+    </view>
+    <view class="brand-card card">
+      <view class="brand-text">
+        苏州德力，专注于高品质相框产品的设计与制造。我们秉承匠心精神，为婚纱摄影行业提供精致的产品解决方案，让每一张珍贵影像都得到完美的展示与珍藏。
+      </view>
+      <view class="brand-features">
+        <view class="feature-item">
+          <view class="feature-num">44</view>
+          <view class="feature-label">款产品</view>
+        </view>
+        <view class="feature-divider"></view>
+        <view class="feature-item">
+          <view class="feature-num">10+</view>
+          <view class="feature-label">年经验</view>
+        </view>
+        <view class="feature-divider"></view>
+        <view class="feature-item">
+          <view class="feature-num">100%</view>
+          <view class="feature-label">品质保证</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系信息 -->
+  <view class="section contact-section">
+    <view class="section-header">
+      <view class="section-title">联系我们</view>
+    </view>
+    <view class="contact-card card">
+      <view class="contact-row">
+        <text class="contact-label">客服微信</text>
+        <text class="contact-value">{{serviceWeChat}}</text>
+        <view class="contact-btn" bindtap="copyWeChat">复制</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,25 @@
+/* 全局样式 */
+page {
+  font-family: -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: #f0ece6;
+  color: #2c2c2c;
+  font-size: 28rpx;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 主题色 */
+.gold { color: #c9a96e; }
+.dark { color: #1a1a2e; }
+
+/* 卡片通用样式 */
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+/* 安全区域 */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

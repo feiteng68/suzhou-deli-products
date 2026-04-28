@@ -1,0 +1,73 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-section">
+    <view class="search-title">输入拼音首字母，快速查找</view>
+    <view class="search-bar">
+      <input class="search-input"
+        placeholder="如：输入 B 搜索北斋、巴黎世家"
+        value="{{searchVal}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        confirm-type="search"
+        maxlength="10" />
+      <view class="search-clear" wx:if="{{searchVal}}" bindtap="clearSearch">✕</view>
+    </view>
+
+    <!-- 字母筛选 -->
+    <scroll-view class="alpha-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="alpha-bar">
+        <view class="alpha-btn all-btn {{!currentFilter ? 'active' : ''}}" bindtap="setFilter" data-val="">
+          <text>全部</text>
+        </view>
+        <view class="alpha-btn {{currentFilter === item ? 'active' : ''}}"
+          wx:for="{{letters}}" wx:key="*this"
+          bindtap="setFilter" data-val="{{item}}">
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="result-count" wx:if="{{filteredCount > 0}}">
+      共 <text class="count-num">{{filteredCount}}</text> 款产品
+    </view>
+  </view>
+
+  <!-- 产品列表 -->
+  <view class="products-wrap">
+    <!-- 字母分组 -->
+    <block wx:for="{{groups}}" wx:key="letter">
+      <view class="group-title" wx:if="{{!currentFilter}}">
+        <view class="letter-badge">{{item.letter}}</view>
+        <view class="group-name">{{item.products.length}} 款产品</view>
+      </view>
+
+      <view class="product-grid">
+        <view class="product-card card" wx:for="{{item.products}}" wx:for-item="product" wx:key="name"
+          bindtap="goDetail" data-name="{{product.name}}">
+          <view class="card-img-wrap">
+            <image class="card-img" src="{{product.imgUrl}}" mode="aspectFill" lazy-load />
+          </view>
+          <view class="card-body">
+            <view class="card-name">{{product.name}}</view>
+            <view class="card-spec" wx:if="{{product.specItems.length > 0}}">
+              <view class="spec-row" wx:for="{{product.specItems}}" wx:for-item="spec" wx:key="type"
+                class="{{spec.isAlbum ? 'spec-row-album' : ''}}">
+                <text class="spec-type {{spec.isAlbum ? 'spec-type-album' : ''}}">{{spec.type}}</text>
+                <view class="spec-sizes">
+                  <text class="spec-size-item" wx:for="{{spec.sizes}}" wx:for-item="size" wx:key="*this">{{size}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{filteredCount === 0 && searched}}">
+      <view class="empty-icon">🔍</view>
+      <view class="empty-text">未找到匹配的产品</view>
+      <view class="empty-hint">换个字母试试</view>
+    </view>
+  </view>
+</view>

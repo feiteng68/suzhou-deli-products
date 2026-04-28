@@ -1,0 +1,41 @@
+.container { padding: 24rpx; padding-bottom: 60rpx; }
+
+/* 头部 */
+.header-section { text-align: center; padding: 32rpx 24rpx; }
+.header-title { font-size: 36rpx; font-weight: 800; color: #1a1a2e; letter-spacing: 8rpx; margin-bottom: 12rpx; }
+.header-sub { font-size: 24rpx; color: #aaa; }
+
+/* 表单 */
+.form-section { padding: 32rpx; margin-top: 16rpx; }
+.form-group { margin-bottom: 28rpx; }
+.form-label { font-size: 26rpx; color: #1a1a2e; font-weight: 600; margin-bottom: 12rpx; display: block; letter-spacing: 2rpx; }
+.form-input {
+  width: 100%; padding: 20rpx 24rpx; border: 2rpx solid #eee; border-radius: 16rpx;
+  font-size: 28rpx; background: #fafaf8; color: #2c2c2c;
+}
+.form-input:focus { border-color: #c9a96e; }
+.form-textarea {
+  width: 100%; padding: 20rpx 24rpx; border: 2rpx solid #eee; border-radius: 16rpx;
+  font-size: 28rpx; background: #fafaf8; color: #2c2c2c; height: 200rpx;
+}
+
+/* 提交 */
+.submit-section { margin-top: 32rpx; padding: 0 20rpx; }
+.submit-btn {
+  padding: 28rpx; border-radius: 48rpx; text-align: center;
+  font-size: 30rpx; font-weight: 600; letter-spacing: 6rpx;
+  background: linear-gradient(135deg, #c9a96e, #a88840); color: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(201,169,110,0.4);
+}
+.submit-btn:active { transform: scale(0.97); opacity: 0.9; }
+
+/* 底部提示 */
+.contact-tip {
+  text-align: center; margin-top: 40rpx; padding: 24rpx;
+}
+.tip-text { font-size: 24rpx; color: #999; }
+.tip-wechat { font-size: 28rpx; color: #c9a96e; font-weight: 600; margin: 0 12rpx; }
+.tip-copy {
+  font-size: 24rpx; color: #c9a96e; padding: 4rpx 20rpx;
+  border: 1rpx solid #c9a96e; border-radius: 24rpx;
+}

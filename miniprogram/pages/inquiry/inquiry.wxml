@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="header-section">
+    <view class="header-title">在线询价</view>
+    <view class="header-sub">填写以下信息，客服将尽快与您联系</view>
+  </view>
+
+  <view class="form-section card">
+    <view class="form-group">
+      <text class="form-label">您的姓名 *</text>
+      <input class="form-input" placeholder="请输入姓名" value="{{form.name}}" bindinput="onInput" data-field="name" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">联系电话 *</text>
+      <input class="form-input" type="number" placeholder="请输入手机号" value="{{form.phone}}" bindinput="onInput" data-field="phone" maxlength="11" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">微信号码</text>
+      <input class="form-input" placeholder="方便客服联系您" value="{{form.wechat}}" bindinput="onInput" data-field="wechat" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">感兴趣的产品</text>
+      <input class="form-input" placeholder="如：良缘、仙女座金" value="{{form.products}}" bindinput="onInput" data-field="products" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">询价备注</text>
+      <textarea class="form-textarea" placeholder="请描述您的需求，如数量、尺寸要求等" value="{{form.remark}}" bindinput="onInput" data-field="remark" maxlength="500" />
+    </view>
+  </view>
+
+  <view class="submit-section">
+    <view class="submit-btn" bindtap="submitForm">提交询价</view>
+  </view>
+
+  <view class="contact-tip">
+    <text class="tip-text">也可直接添加客服微信：</text>
+    <text class="tip-wechat">{{serviceWeChat}}</text>
+    <text class="tip-copy" bindtap="copyWeChat">复制</text>
+  </view>
+</view>

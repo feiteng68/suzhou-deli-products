@@ -1,0 +1,53 @@
+<view class="container" wx:if="{{product}}">
+  <!-- 产品图片 -->
+  <view class="detail-img-wrap">
+    <image class="detail-img" src="{{product.imgUrl}}" mode="aspectFill"
+      bindtap="previewImage" data-url="{{product.imgUrl}}" />
+  </view>
+
+  <!-- 产品信息 -->
+  <view class="detail-content">
+    <!-- 规格表 -->
+    <view class="detail-section" wx:if="{{specItems.length > 0}}">
+      <view class="section-title">
+        <text>产品规格</text>
+        <view class="section-line"></view>
+      </view>
+      <view class="spec-table">
+        <view class="spec-row {{item.isAlbum ? 'spec-album' : ''}}"
+          wx:for="{{specItems}}" wx:key="type">
+          <view class="spec-divider-row" wx:if="{{item.isAlbum && item._firstAlbum}}"></view>
+          <text class="spec-col-type {{item.isAlbum ? 'spec-col-album' : ''}}">{{item.type}}</text>
+          <view class="spec-col-sizes">
+            <text class="spec-chip" wx:for="{{item.sizes}}" wx:for-item="size" wx:key="*this">{{size}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 产品简介 -->
+    <view class="detail-section" wx:if="{{product.intro}}">
+      <view class="section-title">
+        <text>产品简介</text>
+        <view class="section-line"></view>
+      </view>
+      <view class="intro-text">{{product.intro}}</view>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="bottom-actions">
+      <view class="action-btn action-primary" bindtap="contactService">联系客服询价</view>
+    </view>
+  </view>
+</view>
+
+<!-- 加载状态 -->
+<view class="loading-state" wx:if="{{!product && !notFound}}">
+  <view class="loading-text">加载中...</view>
+</view>
+
+<!-- 未找到 -->
+<view class="empty-state" wx:if="{{notFound}}">
+  <view class="empty-icon">😕</view>
+  <view class="empty-text">未找到该产品</view>
+</view>
