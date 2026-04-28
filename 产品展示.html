@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>苏州德力 · 产品展示</title>
+<style>
+  :root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5aa;
+    --gold-dark: #a88840;
+    --dark: #1a1a2e;
+    --text: #2c2c2c;
+    --text-sub: #666;
+    --bg: #f0ece6;
+    --bg-pattern: rgba(201,169,110,0.04);
+    --card-bg: #ffffff;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.04);
+    --card-shadow-hover: 0 4px 16px rgba(0,0,0,0.1), 0 12px 40px rgba(0,0,0,0.06);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(201,169,110,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(26,26,46,0.03) 0%, transparent 50%);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== 顶部 Banner ===== */
+  .header {
+    background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #1a1a2e 100%);
+    padding: 44px 20px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(201,169,110,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 30%, rgba(201,169,110,0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.4), transparent);
+  }
+  .header-logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 8px;
+    text-shadow: 0 2px 20px rgba(201,169,110,0.3);
+    position: relative;
+  }
+  .header-logo span {
+    background: linear-gradient(135deg, #c9a96e, #e8d5aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header-sub {
+    margin-top: 8px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 4px;
+    font-weight: 300;
+    position: relative;
+  }
+  .header-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 16px auto 0;
+    position: relative;
+  }
+
+  /* ===== 搜索 / 字母筛选区 ===== */
+  .search-section {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(240,236,230,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+    padding: 16px 16px 14px;
+    transition: box-shadow 0.3s;
+  }
+  .search-section.scrolled {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .search-title {
+    text-align: center;
+    font-size: 11px;
+    color: #aaa;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+  .search-title em {
+    color: var(--gold-dark);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* 输入框 */
+  .search-input-wrap {
+    position: relative;
+    max-width: 360px;
+    margin: 0 auto 12px;
+  }
+  .search-input {
+    width: 100%;
+    padding: 11px 42px 11px 18px;
+    border: 1.5px solid rgba(201,169,110,0.25);
+    border-radius: 28px;
+    font-size: 15px;
+    background: rgba(255,255,255,0.8);
+    color: var(--text);
+    outline: none;
+    transition: all 0.25s;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .search-input:focus {
+    border-color: var(--gold);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(201,169,110,0.1);
+  }
+  .search-input::placeholder { color: #c5c0b8; font-size: 13px; letter-spacing: 1px; }
+  .search-clear {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #bbb;
+    font-size: 18px;
+    display: none;
+  }
+  .search-clear.show { display: block; }
+
+  /* 字母快捷键 */
+  .alpha-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .alpha-btn {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 7px;
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.6);
+    color: #888;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .alpha-btn:hover { background: rgba(201,169,110,0.12); border-color: var(--gold); color: var(--gold-dark); transform: translateY(-1px); }
+  .alpha-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(201,169,110,0.4);
+    transform: translateY(-1px);
+  }
+  .alpha-btn.all-btn {
+    padding: 0 12px;
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border-color: transparent;
+    color: rgba(255,255,255,0.8);
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+  .alpha-btn.all-btn:hover, .alpha-btn.all-btn.active {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: #fff;
+  }
+
+  /* 统计信息 */
+  .result-count {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 8px;
+    min-height: 16px;
+  }
+  .result-count strong { color: var(--gold); }
+
+  /* ===== 产品网格 ===== */
+  .products-wrap {
+    padding: 24px 12px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* 字母分组标题 */
+  .group-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 4px 12px;
+  }
+  .group-title .letter-badge {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(145deg, var(--dark), #0f3460);
+    color: var(--gold);
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px rgba(26,26,46,0.25);
+    letter-spacing: 0;
+  }
+  .group-title .group-name {
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+
+  /* 产品卡片网格 */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (min-width: 600px) {
+    .product-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  }
+  @media (min-width: 900px) {
+    .product-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  }
+
+  /* 产品卡片 */
+  .product-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s;
+    cursor: pointer;
+    position: relative;
+    opacity: 0;
+    animation: cardReveal 0.5s ease forwards;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+  }
+  .product-card:active { transform: translateY(-2px) scale(0.99); }
+  .product-card.hidden { display: none; }
+
+  /* 图片 —— 原背景色延伸 */
+  .card-img-wrap {
+    width: 100%;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: #ffffff;
+    position: relative;
+  }
+  .card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: block;
+  }
+  .product-card:hover .card-img-wrap img { transform: scale(1.04); }
+
+  /* 图片底部渐变遮罩 */
+  .card-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, rgba(255,255,255,0.8), transparent);
+    pointer-events: none;
+  }
+
+  /* 图片占位 */
+  .card-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    gap: 6px;
+  }
+  .card-img-placeholder .ph-icon { font-size: 32px; }
+  .card-img-placeholder .ph-text { font-size: 11px; }
+
+  /* 卡片内容 */
+  .card-body {
+    padding: 14px 14px 16px;
+    position: relative;
+  }
+  .card-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    line-height: 1.3;
+  }
+  .card-spec-label {
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .card-spec {
+    border-top: 1px dashed rgba(201,169,110,0.25);
+    padding-top: 6px;
+  }
+  .spec-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 4px;
+    font-size: 10.5px;
+    line-height: 1.5;
+  }
+  .spec-row:last-child { margin-bottom: 0; }
+  .spec-type {
+    flex-shrink: 0;
+    width: 42px;
+    color: #9a7030;
+    font-weight: 600;
+    text-align: left;
+  }
+  .spec-sizes {
+    flex: 1;
+    color: #888;
+    word-break: break-all;
+  }
+  .spec-size-item {
+    display: inline-block;
+    background: #f5f2ed;
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin: 1px 2px 1px 0;
+    white-space: nowrap;
+    font-size: 10px;
+  }
+  /* 相册名行：另起一行，上方加细分隔线 */
+  .spec-row-album {
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dashed rgba(201,169,110,0.2);
+  }
+  .spec-type-album {
+    width: auto;
+    min-width: 42px;
+    max-width: 80px;
+    color: #6a5020;
+    font-size: 10px;
+  }
+
+  /* ===== 详情弹窗 ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .modal-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal-box {
+    background: #fff;
+    width: 100%;
+    max-width: 520px;
+    border-radius: 24px 24px 0 0;
+    padding: 0 0 env(safe-area-inset-bottom);
+    max-height: 92vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    -webkit-overflow-scrolling: touch;
+  }
+  .modal-overlay.show .modal-box {
+    transform: translateY(0);
+  }
+  .modal-handle {
+    width: 36px;
+    height: 4px;
+    background: #e0ddd8;
+    border-radius: 2px;
+    margin: 10px auto 0;
+  }
+  .modal-img-wrap {
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .modal-img-wrap img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .modal-content {
+    padding: 22px 22px 36px;
+  }
+  .modal-name {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 4px;
+    letter-spacing: 3px;
+  }
+  .modal-name-en {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+  .modal-section-title {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin: 20px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+  }
+  .modal-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201,169,110,0.25), transparent);
+  }
+  .modal-spec-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .modal-spec-table tr + tr td { padding-top: 6px; }
+  .modal-spec-table td { vertical-align: top; }
+  .modal-spec-col-type {
+    width: 64px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-dark);
+    padding-right: 12px;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+  .modal-spec-col-sizes {
+    font-size: 12.5px;
+    color: #555;
+    line-height: 2;
+  }
+  .modal-size-chip {
+    display: inline-block;
+    background: rgba(240,236,230,0.6);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 6px;
+    padding: 2px 10px;
+    margin: 2px 4px 2px 0;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .modal-size-chip:hover {
+    background: rgba(201,169,110,0.12);
+  }
+  /* 弹窗相册名分隔线行 */
+  .modal-spec-divider td {
+    padding: 4px 0 2px !important;
+    border-top: 1px dashed rgba(201,169,110,0.3);
+  }
+  /* 弹窗相册名行 */
+  .modal-spec-album-row td { padding-top: 4px !important; }
+  .modal-spec-col-album {
+    font-size: 12px !important;
+    color: #6a5020 !important;
+    font-weight: 600 !important;
+    width: auto !important;
+    min-width: 64px;
+  }
+  .modal-intro {
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 2;
+    margin-top: 10px;
+    text-indent: 2em;
+    letter-spacing: 0.5px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0,0,0,0.1);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  /* ===== 空状态 ===== */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    display: none;
+  }
+  .empty-state.show { display: block; }
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-text { font-size: 14px; color: #aaa; }
+
+  /* ===== 底部 ===== */
+  .footer {
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 11px;
+    color: #c5c0b8;
+    letter-spacing: 3px;
+    border-top: 1px solid rgba(201,169,110,0.08);
+  }
+
+  /* 动画 */
+  @keyframes cardReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .product-card { animation: none; opacity: 1; }
+    .product-card:hover { transform: none; }
+    .card-img-wrap img { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部 Banner -->
+<header class="header">
+  <div class="header-logo"><span>苏州</span>德力</div>
+  <div class="header-sub">SUZHOU DELI · PRODUCT GALLERY</div>
+  <div class="header-divider"></div>
+</header>
+
+<!-- 搜索 & 字母筛选 -->
+<div class="search-section">
+  <div class="search-title">输入产品拼音首字母，快速查找 <em>效果图</em></div>
+  <div class="search-input-wrap">
+    <input class="search-input" id="searchInput" type="text" maxlength="10"
+      placeholder="如：输入 B 搜索北斋、巴黎世家…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="search-clear" id="searchClear" onclick="clearSearch()">✕</span>
+  </div>
+  <div class="alpha-bar" id="alphaBar"></div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<!-- 产品展示区 -->
+<div class="products-wrap" id="productsWrap">
+  <!-- JS 动态填充 -->
+</div>
+
+<!-- 空状态 -->
+<div class="empty-state" id="emptyState">
+  <div class="empty-icon">🔍</div>
+  <div class="empty-text">未找到匹配的产品，换个字母试试</div>
+</div>
+
+<!-- 详情弹窗 -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-handle"></div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- 底部 -->
+<footer class="footer">© 苏州德力 · 版权所有</footer>
+
+<script>
+// ==================== 产品数据 ====================
+const PRODUCTS = [
+  { name: "黛莲娜", pinyin: "DLN", spec: "艺术照/110x60cm-1 组合照/35x50cm-2/45x50cm-1/25x50cm-1 摆台/15x20cm-2", intro: "" },
+  { name: "克莱茵S2", pinyin: "KLYS2", spec: "艺术照/110x60cm-1 组合照/50x50cm-1/30x50cm-2 摆台/20x25cm-2 丝慕/10x10寸(50x24.3cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "晴川", pinyin: "QC", spec: "艺术照/110x60cm-1 组合照/35x55cm-2/35x25cm-2 摆台/20x25cm-2 晴川/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "矜持", pinyin: "JC", spec: "艺术照/110x60cm-1 组合照/28x47.5cm-2/40x47.5cm-1 摆台/15x20cm-1/35.5x17.7cm-1 矜持/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "素素", pinyin: "SS", spec: "艺术照/100x60cm-1 组合照/35x52cm-3 摆台/15.2x20.3cm-2 金生金世/10x10寸(50x24.3cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "新风尚", pinyin: "XFS", spec: "", intro: "" },
+  { name: "帧藏浪漫", pinyin: "ZCLM", spec: "艺术照/110x60cm-1 组合照/40x55cm-3 摆台/15.2x20.3cm-2", intro: "" },
+  { name: "北斋", pinyin: "BZ", spec: "艺术照/110x60cm-1 组合照/50x45cm-1/18x32cm-2/20x20cm-2 摆台/17x17cm-1/15x20cm-1", intro: "" },
+  { name: "夕瑶", pinyin: "XY", spec: "艺术照/100x60cm-1 组合照/35x52cm-3 摆台/20x25cm-2", intro: "" },
+  { name: "墨锦", pinyin: "MJ", spec: "艺术照/110x60cm-1 组合照/35x52cm-2/52x52cm-1 摆台/20x25cm-1/20x20cm-1 纯粹/10x10寸(50x24.3cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "良缘", pinyin: "LY", spec: "艺术照/110x60cm-1（卡纸） 组合照/60x60cm-1/30x60cm-2（卡纸） 摆台/15x20cm-2（卡纸） 戴丽雅/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "良缘系列，秉承中式美学理念，甄选钛合金框条，工艺考究细节生动。寓意美满良缘，为婚纱照赋予深深祝福，承载爱情佳话，恒久珍藏幸福瞬间。" },
+  { name: "誓言", pinyin: "SY", spec: "艺术照/110x60cm-1 组合照/35x50cm-2/35x25cm-2/25x50cm-1 摆台/20.3x25.4cm-1/25.4x25.4cm-1 格拉芙/10x10寸(51x25.4cm)/14x14寸(71x35.5cm)", intro: "誓言永恒，爱意绵长。卡其色铝合金线条，勾勒出时尚的轮廓。时尚卡纸装裱，展现流行的赫本风。记录此刻的美好，让爱的誓言永驻心间。" },
+  { name: "天籁", pinyin: "TL", spec: "艺术照/50x74cm-1 组合照/35x90cm-1/35x40cm-2（卡纸） 摆台/20x25cm-2 晴川/10x10寸(50x25.4cm)/12x14寸(70x30.5cm)", intro: "" },
+  { name: "沉香灰", pinyin: "CXH", spec: "艺术照/60x90cm-1 组合照/30x45cm-2/45x65cm-1 摆台/15x20cm-2 纯粹/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "仙女座金", pinyin: "XNZJ", spec: "艺术照/110x60cm-1 组合照/35x52cm-2/52x52cm-1 摆台/15.2X20.3cm-2 塞纳/10x10寸(51x25.4cm)/14x14寸(71x35.5cm)", intro: "仙女座金以金色铝合金打造轻奢质感，搭配细腻皮质内嵌，碰撞出复古与摩登的双重美感。金属流光呼应婚礼华彩，皮质柔韧守护珍贵画面，防氧化工艺让浪漫在岁月中恒久如新，承载银河般璀璨的爱意。" },
+  { name: "梵高", pinyin: "FG", spec: "艺术照/110x60cm-1 组合照/50x50cm-1/30x50cm-2 摆台/20x25cm-2 梵高/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "梵高，以色彩与笔触捕捉生命的激情。艺术感十足的相框，让每一张照片都成为一幅画作，展现独特的美学价值。" },
+  { name: "浅微", pinyin: "QW", spec: "艺术照/100x60cm-1 组合照/30x50cm-2/50x50cm-1（卡纸+亚克力） 摆台/15.2x20.3cm-2（卡纸+亚克力） 浅微/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "浅微，以素雅之美，展现生活的精致与细腻。浅色调营造温柔氛围，亚克力材质增添现代感，记录每一个珍贵瞬间。" },
+  { name: "幽檀秘语", pinyin: "YTMY", spec: "艺术照/110x60cm-1 组合照/55x55cm-1/30x55cm-2 摆台/20x25cm-2 幽檀秘语/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "缘定今生", pinyin: "YDJS", spec: "艺术照/110x60cm-1 组合照/60x60cm-1/30x60cm-2 摆台/20x25cm-2 缘定今生/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "凝香", pinyin: "NX", spec: "艺术照/100x60cm-1 组合照/25x36cm-3/75x36cm-1 摆台/17x22.5cm-2 凝香/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "GL时尚", pinyin: "GLSS", spec: "艺术照/110x60cm-1 组合照/50x55cm-1/30x55cm-2 摆台/20x25cm-2 GL时尚/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "简影", pinyin: "JY", spec: "艺术照/100x60cm-1 组合照/30x50cm-2/50x50cm-1 摆台/20x25cm-2 简影/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "简约而不简单，影像记录生活之美。极简设计风格，让照片成为空间的艺术点缀，彰显现代审美品位。" },
+  { name: "浅忆", pinyin: "QY", spec: "艺术照/100x60cm-1 组合照/45x60cm-1/25x60cm-2 摆台/20x25cm-2 浅忆/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "浅淡的色彩，深刻的记忆。柔和的色调搭配精致工艺，将美好瞬间化为永恒，诉说着每一段动人的故事。" },
+  { name: "塞维亚", pinyin: "SWY", spec: "艺术照/110x60cm-1 组合照/50x50cm-1/30x50cm-2（卡纸） 摆台/20x25cm-2 塞维亚/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "塞维亚，充满异域风情的浪漫之都。金色与深棕的搭配，演绎出独特的欧式美学，让婚纱照充满异国情调。" },
+  { name: "塞纳", pinyin: "SN", spec: "艺术照/110x60cm-1 组合照/35x52cm-2/52x52cm-1 摆台/20x25cm-2 塞纳/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "倾城之恋", pinyin: "QCZL", spec: "艺术照/110x60cm-1 组合照/50x55cm-1/30x55cm-2 摆台/20x25cm-2 倾城之恋/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "A159", pinyin: "A", spec: "艺术照/110x60cm-1 组合照/50x50cm-1/30x50cm-2 摆台/20x25cm-2", intro: "A159系列，简约现代的设计语言，精致的工艺细节，为婚纱照提供完美的展示框架。" },
+  { name: "悠品", pinyin: "YP", spec: "艺术照/100x60cm-1 组合照/35x50cm-3 摆台/15x20cm-2 悠品/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "悠然自得，品味生活。温润的木质色调，搭配精致的工艺，营造出温暖而有品质的展示空间。" },
+  { name: "芳华", pinyin: "FH", spec: "艺术照/100x60cm-1 组合照/40x40cm-3 摆台/13.6x18.4cm-2 星河/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "芳华正茂，青春无限。细腻的工艺诠释年轻的活力，让每一张婚纱照都焕发出最美的光彩。" },
+  { name: "芸芷", pinyin: "YZ", spec: "艺术照/100x60cm-1 组合照/50x50cm-1/30x50cm-2 摆台/20x25cm-2 芸芷/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "芸芷，取自自然之美。清新淡雅的设计风格，如同山间野花，质朴而迷人，记录爱情最真实的模样。" },
+  { name: "墨澜", pinyin: "ML", spec: "艺术照/110x60cm-1 组合照/50x50cm-1/30x50cm-2 摆台/20x25cm-2 墨澜/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "墨色流澜，意境深远。东方美学与现代工艺的完美融合，演绎出沉静而深邃的艺术气质。" },
+  { name: "循秘", pinyin: "XM", spec: "艺术照/100x60cm-1（油画布） 组合照/40x40cm-2/40x60cm-1（油画布） 摆台/20x25cm-2（油画布） 循秘/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "寻觅秘境，探索美的奥义。油画布的质感赋予照片独特的艺术气质，每一幅都如同珍贵的艺术品。" },
+  { name: "影时光", pinyin: "YSG", spec: "艺术照/100x60cm-1 组合照/50x50cm-1/30x50cm-2 摆台/20x25cm-2 影时光/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "影像定格时光，爱意永不褪色。复古胶片风格的相框设计，将每一个幸福瞬间化为永恒的艺术珍藏。" },
+  { name: "奢香夫人", pinyin: "SXFR", spec: "艺术照/110x60cm-1 组合照/60x60cm-1/30x60cm-2 摆台/20x25cm-2 奢香夫人/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "奢华与典雅的极致融合。精选优质材料，匠心工艺打造，彰显高贵气质，是追求品位人士的不二之选。" },
+  { name: "循绪", pinyin: "XXU", spec: "艺术照/70x120cm-1（油画布） 组合照/40x40cm-3 摆台/26x31cm-2（油画布） 循绪/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "循序之美，纯白钛合金凝练，演绎悬浮之美，展现黑白艺术的魅力。层次空间尽显，优雅绽放。" },
+  { name: "声之形", pinyin: "SZX", spec: "艺术照/49x79cm-1 组合照/25x19cm-1/26.4x26.4cm-1/49x22.5cm-1/49x25cm-1 摆台/15x20cm-2 声之形/12x12寸(60x30.5cm)/12x14寸(70x30.5cm)", intro: "声之形，爱之韵。黑胶唱片，流转着岁月的旋律。悬浮工艺，打造立体之美，让回忆在空中奏响。婚纱照与黑胶的融合，记录下爱的乐章，永恒留存。" },
+  { name: "芳华S2", pinyin: "FHS2", spec: "艺术照/100x60cm-1 组合照/40x40cm-3 摆台/13.6x18.4cm-2 星河灰/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "莫奈花园", pinyin: "MNHY", spec: "艺术照/100x60cm-1 组合照/30x45cm-2/60x45cm-1（卡纸） 摆台/15x20cm-2 莫奈花园/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "在莫奈花园的光影中，定格永恒的美丽。仿LV的纹理框边，宛如艺术的笔触，勾勒出细腻的质感。电影风的照片，演绎着浪漫的故事。精致的肌理皮面相册，承载着爱的记忆，每一页都散发着温暖的气息。" },
+  { name: "繁花", pinyin: "FF", spec: "艺术照/100x54cm-1（晶钻） 组合照/50x50cm-1/30x50cm-2（卡纸+亚克力） 摆台/14.5x19.5cm-1/13.5x13.5cm-1（卡纸+亚克力） 塞维亚2024/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "繁花入镜，引领风潮。咖色橡木框，质感细腻。经典与时尚交融，奢华与品味并存。诠释时尚魅力，记录幸福时光。" },
+  { name: "巴黎世家", pinyin: "BLSJ", spec: "艺术照/120x60cm-1（卡纸+亚克力） 组合照/60x80cm-1/40x40cm-1/30x40cm-2（卡纸+亚克力） 摆台/20x25cm-2 佳人/10x10寸(50x25.4cm)+盒/14x14寸(70x35.5cm)+盒", intro: "法式优雅，中国风华。法式浪漫与中国风情的邂逅。欧式经典元素，点缀相框之间。横长框设计，展现艺术的无尽魅力。" },
+  { name: "罗曼庄园", pinyin: "LMZY", spec: "艺术照/100x60cm-1（卡纸） 组合照/45x55cm-2/45x45cm-2（卡纸） 摆台/20x25cm-2（卡纸） 罗曼庄园/12x12寸(60x30.5cm)/12x14寸(70x30.5cm)", intro: "" },
+  { name: "卡拉黑", pinyin: "KLH", spec: "艺术照/90x60cm-1 组合照/50x50cm-1/30x50cm-2 摆台/20x25cm-1/15x20cm-1 卡蔓黑/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "卡拉黑以纯粹黑色诠释坚毅深邃，彰显不凡高雅气质。精选铝合金材质，历久弥新，黑色基调映衬下，照片更显庄重沉稳。" },
+  { name: "天使之舞", pinyin: "TSZW", spec: "艺术照/110x60cm-1 组合照/50x50cm-3 摆台/20x25cm-2 10x10寸(50x25.4cm) 14x14寸(70x35.5cm)", intro: "天使之舞相框，甄选黑色铝合金打造，坚固耐用且高雅时尚，适于展示珍贵影像，轻奢品位尽显。" },
+  { name: "流光", pinyin: "LG", spec: "艺术照/110x60cm-1 组合照/90x30cm-1/45x40cm-2 摆台/18x18cm-1/20x25cm-1 告白(2)/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "倾城之恋", pinyin: "QCZL", spec: "艺术照/110x60cm-1 组合照/50x55cm-1/30x55cm-2 摆台/20x25cm-2 倾城之恋/10x10寸(50x25.4cm)/14x14寸(70x35.5cm)", intro: "" },
+  { name: "影时光", pinyin: "YSG", spec: "艺术照/100x60cm-1 组合照/50x50cm-1/30x50cm-2 摆台/20x25cm-2", intro: "影像定格时光，爱意永不褪色。复古胶片风格设计，将幸福瞬间化为永恒珍藏。" }
+];
+
+// 图片路径映射（文件名对应产品名，包含空格情况）
+const IMG_MAP = {
+  "巴黎世家": "巴黎世家.jpg",
+  "北斋": "北斋.jpg",
+  "沉香灰": "沉香灰.jpg",
+  "黛莲娜": "黛莲娜.jpg",
+  "繁花": "繁花.jpg",
+  "梵高": "梵高.jpg",
+  "芳华": "芳华.jpg",
+  "芳华S2": "芳华S2.jpg",
+  "简影": "简影.jpg",
+  "矜持": "矜持.jpg",
+  "卡拉黑": "卡拉黑.jpg",
+  "克莱茵S2": "克莱茵S2.jpg",
+  "良缘": "良缘.jpg",
+  "流光": "流光.jpg",
+  "罗曼庄园": "罗曼庄园.jpg",
+  "莫奈花园": "莫奈花园.jpg",
+  "墨锦": "墨 锦.jpg",
+  "墨澜": "墨澜.jpg",
+  "凝香": "凝香.jpg",
+  "浅微": "浅微.jpg",
+  "浅忆": "浅忆.jpg",
+  "倾城之恋": "倾城之恋.jpg",
+  "晴川": "晴川.jpg",
+  "塞纳": "塞纳.jpg",
+  "塞维亚": "塞维亚.jpg",
+  "奢香夫人": "奢香夫人.jpg",
+  "声之形": "声之形.jpg",
+  "誓言": "誓言.jpg",
+  "素素": "素素.jpg",
+  "天籁": "天籁.jpg",
+  "天使之舞": "天使之舞.jpg",
+  "仙女座金": "仙女座金.jpg",
+  "新风尚": "新风尚.jpg",
+  "循秘": "循秘.jpg",
+  "循绪": "循绪.jpg",
+  "夕瑶": "夕 瑶.jpg",
+  "影时光": "影时光.jpg",
+  "幽檀秘语": "幽檀秘语.jpg",
+  "悠品": "悠品.jpg",
+  "缘定今生": "缘定今生.jpg",
+  "芸芷": "芸芷.jpg",
+  "帧藏浪漫": "帧藏浪漫.jpg",
+  "A159": "A159.jpg",
+  "GL时尚": "GL时尚.jpg"
+};
+
+// 图片基础路径（GitHub Pages: 使用相对路径）
+const IMG_BASE = "./image/";
+
+// ==================== 去重（按名称） ====================
+const seen = new Set();
+const UNIQUE_PRODUCTS = PRODUCTS.filter(p => {
+  if (seen.has(p.name)) return false;
+  seen.add(p.name);
+  return true;
+});
+
+// ==================== 按拼音首字母分组 ====================
+function getFirstLetter(pinyin) {
+  if (!pinyin) return '#';
+  return pinyin[0].toUpperCase();
+}
+
+// 收集所有首字母
+const allLetters = [...new Set(UNIQUE_PRODUCTS.map(p => getFirstLetter(p.pinyin)))].sort();
+
+// ==================== 规格解析 ====================
+/**
+ * 将规格字符串解析为 [{type, sizes, isAlbum}] 结构
+ * type: '艺术照'|'组合照'|'摆台'|中文相册名
+ * sizes: 尺寸数组
+ * isAlbum: true 表示摆台之后的中文相册名行，另起一行左对齐
+ */
+function parseSpecItems(spec) {
+  if (!spec) return [];
+  const result = [];
+  const MAIN_TYPES = ['艺术照', '组合照', '摆台'];
+
+  // 用正则按三大类型切分，保留分隔符
+  // 格式：类型名/尺寸1/尺寸2...  中文相册名/尺寸1/尺寸2...
+  const cleaned = spec.replace(/\s+/g, ' ').trim();
+
+  // 先提取三大类型段落
+  // 思路：找所有"艺术照/"、"组合照/"、"摆台/"的位置，依次切段
+  const typePattern = /(艺术照|组合照|摆台)\//g;
+  const matches = [];
+  let m;
+  while ((m = typePattern.exec(cleaned)) !== null) {
+    matches.push({ index: m.index, type: m[1] });
+  }
+
+  if (matches.length === 0) {
+    // 没有标准类型，全部作为相册名行
+    result.push({ type: '', sizes: [cleaned], isAlbum: true });
+    return result;
+  }
+
+  // 按匹配位置切段
+  for (let i = 0; i < matches.length; i++) {
+    const start = matches[i].index + matches[i].type.length + 1; // 跳过"类型/"
+    const end = i + 1 < matches.length ? matches[i + 1].index : cleaned.length;
+    const segRaw = cleaned.slice(start, end).trim();
+
+    if (matches[i].type !== '摆台') {
+      // 艺术照、组合照：直接按/分割尺寸
+      const sizes = segRaw.split('/').map(s => s.trim()).filter(s => s);
+      result.push({ type: matches[i].type, sizes, isAlbum: false });
+    } else {
+      // 摆台段：摆台尺寸在前，之后可能跟 "中文名/尺寸/尺寸"
+      // 找第一个中文字开头的非尺寸部分
+      // 策略：找"[中文]{1,8}/"模式作为相册名起点
+      const albumSplit = segRaw.match(/^(.*?)\s+([\u4e00-\u9fa5A-Z][^\s\/]{0,12}\/.*)?$/s);
+      
+      // 更精确：按"空格+中文开头词/"切分
+      const albumIdx = segRaw.search(/\s+[\u4e00-\u9fa5A-Za-z][\u4e00-\u9fa5A-Za-z0-9\s]{0,10}\//);
+      
+      if (albumIdx !== -1) {
+        // 摆台尺寸部分
+        const plateSizes = segRaw.slice(0, albumIdx).trim().split('/').map(s => s.trim()).filter(s => s);
+        result.push({ type: '摆台', sizes: plateSizes, isAlbum: false });
+
+        // 相册名及其尺寸（可能多组）
+        const albumPart = segRaw.slice(albumIdx).trim();
+        // 再次按"空格+中文/英文字母开头词"分割多个相册名
+        const albumChunks = albumPart.split(/\s+(?=[\u4e00-\u9fa5A-Za-z])/);
+        albumChunks.forEach(chunk => {
+          chunk = chunk.trim();
+          if (!chunk) return;
+          const slashIdx = chunk.indexOf('/');
+          if (slashIdx !== -1) {
+            const albumName = chunk.slice(0, slashIdx).trim();
+            const albumSizes = chunk.slice(slashIdx + 1).split('/').map(s => s.trim()).filter(s => s);
+            if (albumName) result.push({ type: albumName, sizes: albumSizes, isAlbum: true });
+          } else {
+            result.push({ type: chunk, sizes: [], isAlbum: true });
+          }
+        });
+      } else {
+        // 摆台后无相册名，全部是尺寸
+        const sizes = segRaw.split('/').map(s => s.trim()).filter(s => s);
+        result.push({ type: '摆台', sizes, isAlbum: false });
+      }
+    }
+  }
+
+  return result;
+}
+
+// 卡片内规格渲染（紧凑版）
+function renderSpecTags(spec) {
+  if (!spec) return '<span style="color:#ccc;font-size:10px">暂无规格</span>';
+  const items = parseSpecItems(spec);
+  if (items.length === 0) return `<div class="spec-row"><span class="spec-sizes">${spec}</span></div>`;
+
+  return items.map(item => {
+    if (item.isAlbum) {
+      // 相册名：另起一行，左对齐，带分隔线
+      return `
+        <div class="spec-row spec-row-album">
+          <span class="spec-type spec-type-album">${item.type}</span>
+          <span class="spec-sizes">${item.sizes.map(s =>
+            `<span class="spec-size-item">${s}</span>`
+          ).join('')}</span>
+        </div>`;
+    }
+    return `
+      <div class="spec-row">
+        <span class="spec-type">${item.type}</span>
+        <span class="spec-sizes">${item.sizes.map(s =>
+          `<span class="spec-size-item">${s}</span>`
+        ).join('')}</span>
+      </div>`;
+  }).join('');
+}
+
+// 弹窗内规格渲染（详细版，表格对齐）
+function renderModalSpec(spec) {
+  if (!spec) return '';
+  const items = parseSpecItems(spec);
+  if (items.length === 0) return `<tr><td class="modal-spec-col-type"></td><td class="modal-spec-col-sizes">${spec}</td></tr>`;
+
+  let html = '';
+  let hasAlbum = false;
+  items.forEach((item, idx) => {
+    if (item.isAlbum && !hasAlbum) {
+      // 相册名前加分隔行
+      hasAlbum = true;
+      html += `<tr><td colspan="2" class="modal-spec-divider"></td></tr>`;
+    }
+    html += `
+      <tr class="${item.isAlbum ? 'modal-spec-album-row' : ''}">
+        <td class="modal-spec-col-type ${item.isAlbum ? 'modal-spec-col-album' : ''}">${item.type}</td>
+        <td class="modal-spec-col-sizes">${item.sizes.map(s =>
+          `<span class="modal-size-chip">${s}</span>`
+        ).join('')}</td>
+      </tr>`;
+  });
+  return html;
+}
+
+// ==================== 渲染产品 ====================
+function getImgSrc(product) {
+  const filename = IMG_MAP[product.name];
+  if (filename) return IMG_BASE + filename;
+  // 尝试直接匹配
+  return IMG_BASE + product.name + '.jpg';
+}
+
+function renderProducts(filter) {
+  const wrap = document.getElementById('productsWrap');
+  wrap.innerHTML = '';
+
+  filter = (filter || '').toUpperCase().trim();
+
+  // 按首字母过滤
+  let filtered = UNIQUE_PRODUCTS;
+  if (filter) {
+    filtered = UNIQUE_PRODUCTS.filter(p => p.pinyin.toUpperCase().startsWith(filter));
+  }
+
+  if (filtered.length === 0) {
+    document.getElementById('emptyState').classList.add('show');
+    document.getElementById('resultCount').innerHTML = '';
+    return;
+  }
+  document.getElementById('emptyState').classList.remove('show');
+
+  // 统计信息
+  document.getElementById('resultCount').innerHTML = filter
+    ? `共找到 <strong>${filtered.length}</strong> 款匹配产品`
+    : `全部 <strong>${filtered.length}</strong> 款产品`;
+
+  // 按首字母分组
+  const groups = {};
+  filtered.forEach(p => {
+    const letter = getFirstLetter(p.pinyin);
+    if (!groups[letter]) groups[letter] = [];
+    groups[letter].push(p);
+  });
+
+  const sortedLetters = Object.keys(groups).sort();
+
+  sortedLetters.forEach(letter => {
+    // 分组标题（只在多组或全部展示时显示）
+    if (!filter || filter.length === 0) {
+      const gtDiv = document.createElement('div');
+      gtDiv.className = 'group-title';
+      gtDiv.innerHTML = `
+        <div class="letter-badge">${letter}</div>
+        <div class="group-name">${groups[letter].length} 款产品</div>
+      `;
+      wrap.appendChild(gtDiv);
+    }
+
+    const grid = document.createElement('div');
+    grid.className = 'product-grid';
+    wrap.appendChild(grid);
+
+    groups[letter].forEach((product, idx) => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.style.animationDelay = (idx * 0.04) + 's';
+
+      const imgSrc = getImgSrc(product);
+
+      card.innerHTML = `
+        <div class="card-img-wrap">
+          <img src="${imgSrc}" alt="${product.name}" 
+            onerror="this.parentNode.innerHTML='<div class=\\'card-img-placeholder\\'><div class=\\'ph-icon\\'>🖼</div><div class=\\'ph-text\\'>效果图</div></div>'"
+            loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-name">${product.name}</div>
+          ${product.spec ? '<div class="card-spec-label">SPEC · 规格</div>' : ''}
+          <div class="card-spec">${renderSpecTags(product.spec)}</div>
+        </div>
+      `;
+      card.addEventListener('click', () => openModal(product));
+      grid.appendChild(card);
+    });
+  });
+}
+
+// ==================== 弹窗 ====================
+function openModal(product) {
+  const imgSrc = getImgSrc(product);
+  const modal = document.getElementById('modalOverlay');
+  const content = document.getElementById('modalContent');
+
+  content.innerHTML = `
+    <div style="position:relative">
+      <div class="modal-img-wrap">
+        <img src="${imgSrc}" alt="${product.name}"
+          onerror="this.parentNode.style.background='#f5f2ed';this.style.display='none'">
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-content">
+      ${product.spec ? `
+        <div class="modal-section-title">产品规格</div>
+        <table class="modal-spec-table">
+          ${renderModalSpec(product.spec)}
+        </table>
+      ` : ''}
+      ${product.intro ? `
+        <div class="modal-section-title">产品简介</div>
+        <p class="modal-intro">${product.intro}</p>
+      ` : ''}
+    </div>
+  `;
+
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay')) return;
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ==================== 搜索 & 字母筛选 ====================
+let currentFilter = '';
+
+function buildAlphaBar() {
+  const bar = document.getElementById('alphaBar');
+  // 全部按钮
+  const allBtn = document.createElement('button');
+  allBtn.className = 'alpha-btn all-btn active';
+  allBtn.textContent = '全部';
+  allBtn.id = 'btn-all';
+  allBtn.addEventListener('click', () => {
+    setFilter('');
+  });
+  bar.appendChild(allBtn);
+
+  allLetters.forEach(letter => {
+    const btn = document.createElement('button');
+    btn.className = 'alpha-btn';
+    btn.id = 'btn-' + letter;
+    btn.textContent = letter;
+    btn.addEventListener('click', () => {
+      setFilter(letter);
+    });
+    bar.appendChild(btn);
+  });
+}
+
+function setFilter(val) {
+  currentFilter = val.toUpperCase();
+
+  // 更新按钮状态
+  document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+  if (!val) {
+    const ab = document.getElementById('btn-all');
+    if (ab) ab.classList.add('active');
+  } else {
+    const ab = document.getElementById('btn-' + val.toUpperCase());
+    if (ab) ab.classList.add('active');
+  }
+
+  // 同步输入框
+  const input = document.getElementById('searchInput');
+  input.value = val;
+  document.getElementById('searchClear').classList.toggle('show', !!val);
+
+  renderProducts(val);
+}
+
+function clearSearch() {
+  setFilter('');
+  document.getElementById('searchInput').focus();
+}
+
+// 输入框监听
+document.getElementById('searchInput').addEventListener('input', function() {
+  const val = this.value.trim().toUpperCase();
+  document.getElementById('searchClear').classList.toggle('show', !!val);
+
+  // 高亮对应字母按钮
+  document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+  if (!val) {
+    const ab = document.getElementById('btn-all');
+    if (ab) ab.classList.add('active');
+  } else {
+    // 找匹配的字母
+    const ab = document.getElementById('btn-' + val[0]);
+    if (ab) ab.classList.add('active');
+  }
+
+  currentFilter = val;
+  renderProducts(val);
+});
+
+// 弹窗触摸滑动关闭
+let touchStartY = 0;
+document.getElementById('modalBox').addEventListener('touchstart', e => {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+document.getElementById('modalBox').addEventListener('touchend', e => {
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (dy > 80 && document.getElementById('modalBox').scrollTop <= 0) {
+    document.getElementById('modalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}, { passive: true });
+
+// ==================== 初始化 ====================
+buildAlphaBar();
+renderProducts('');
+</script>
+</body>
+</html>
