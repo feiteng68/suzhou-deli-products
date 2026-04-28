@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no,email=no" />
+  <title>苏州德力 - 产品展示</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="header-content">
+        <h1 class="brand-title">苏州德力</h1>
+        <p class="brand-subtitle">专业相框产品展示</p>
+      </div>
+    </header>
+
+    <div class="search-section">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="输入首字母快速查找产品 (如: Q, S, F...)"
+          maxlength="10"
+        />
+        <button class="clear-btn" onclick="clearSearch()">✕</button>
+      </div>
+      <div id="searchResult" class="search-result"></div>
+    </div>
+
+    <div class="letter-nav">
+      <div id="letterList" class="letter-list"></div>
+    </div>
+
+    <div id="productGrid" class="product-grid"></div>
+
+    <div id="noResult" class="no-result" style="display: none;">
+      <p>未找到匹配的产品</p>
+    </div>
+
+    <footer class="footer">
+      <p>© 2026 苏州德力</p>
+    </footer>
+
+    <div id="backToTop" class="back-to-top" onclick="scrollToTop()">↑</div>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+</html>
