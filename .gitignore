@@ -12,9 +12,21 @@ Thumbs.db
 # OS
 .DS_Store
 
-# Excel source files (keep for reference but exclude from Pages build)
+# Excel source files
 *.xlsx
 
 # Python cache
 __pycache__/
 *.pyc
+
+# Documentation (keep in repository but not needed for Pages)
+docs/
+new_products/
+backups/
+
+# Development scripts (not needed for deployed site)
+auto_add_product.py
+read_excel.py
+generate_pinyin.py
+products_data.json
+*.bat
